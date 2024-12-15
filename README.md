@@ -1,0 +1,2 @@
+# webpackESLintPrettierTemplate
+webpack template
