@@ -3,7 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Weather API</title>
   </head>
-  <body></body>
+  <body>
+      <div class='container'> 
+
+        <h1>Weather App</h1>
+        <img id='loading' src="imgs/Australia_Köppen.svg.png" alt="climate types of Australia">
+
+        <div class='getLocation'>
+          <p>Search Here</p>
+          <div class="search">
+            <input type="search" id="locationSearch" placeholder='City, Country'>
+            <button id='searchButton'>Submit</button>
+          </div>
+          <p>OR</p>
+          <button id='shareLocation'>Share Location</button>
+        </div>
+        
+
+        <div class='sevenDay hidden'>
+          <p>7 day forecast</p>
+        </div>
+
+        <div class='currentDay hidden'>
+          <p>Current day forecast</p>
+          <div class='weatherImg-condition'>
+
+          </div>
+          <div class='weatherData'>
+              
+          </div>
+        </div>
+
+        <div class='footer'>
+          <p>Copyright © 2024 Broc Johnson. All Rights Reserved.</p>
+          <a href="https://github.com/dwaynethebroc/weatherAPIApp" target="_blank">
+            <img id="githubLogo" src="imgs/github.png">
+          </a>
+        </div>
+        
+      </div>
+  </body>
 </html>

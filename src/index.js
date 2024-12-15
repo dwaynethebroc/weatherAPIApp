@@ -1,4 +1,8 @@
 import "./styles.css";
-import { greeting } from "./greeting.js";
+import { getWeatherDataCityCountry, getWeatherDataGeoLocation} from "./weather.js";
 
-console.log(greeting);
+const searchButton = document.getElementById('searchButton');
+searchButton.addEventListener('click', getWeatherDataCityCountry);
+
+const shareLocationButton = document.getElementById('shareLocation');
+shareLocationButton.addEventListener('click', getWeatherDataGeoLocation);
