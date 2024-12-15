@@ -10,11 +10,27 @@ const getWeatherDataCityCountry = async function(){
 
     console.log(`${APIrequestURL + location.city},${location.country}?key=${key}`)
 
-    const response = await fetch(`${APIrequestURL + location.city},${location.country}?key=${key}`, {mode: "cors"})
+    const response = await fetch(`${APIrequestURL + location.city},${location.country}?unitGroup=metric&key=${key}`, {mode: "cors"})
         .catch(onFailure);
     const geoData = await response.json();
     
-    return geoData;
+    //buildBasicDataInfo(geoData);
+}
+
+const getWeatherDataGeoLocation = async function(){
+    const locationData = await shareLocation();
+    console.log(locationData);
+
+    const key = "P7RMSP9B8LK52KS5VP79GS5TB";
+    const APIrequestURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
+    
+    console.log(`${APIrequestURL + locationData.latitude},${locationData.longitude}?unitGroup=metric&key=${key}`);
+
+    const response = await fetch(`${APIrequestURL + locationData.latitude},${locationData.longitude}?key=${key}`, {mode: "cors"});
+    const weatherData = await response.json();
+
+    //buildBasicDataInfo(weatherData);
+
 }
 
 const shareLocation = function(){
@@ -31,22 +47,6 @@ const shareLocation = function(){
             reject(onFailure("No Geo Data"));
         }
     })
-}
-
-const getWeatherDataGeoLocation = async function(){
-    const locationData = await shareLocation();
-    console.log(locationData);
-
-    const key = "P7RMSP9B8LK52KS5VP79GS5TB";
-    const APIrequestURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
-    
-    console.log(`${APIrequestURL + locationData.latitude},${locationData.longitude}?unitGroup=metric&key=${key}`);
-
-    const response = await fetch(`${APIrequestURL + locationData.latitude},${locationData.longitude}?key=${key}`, {mode: "cors"});
-    const weatherData = await response.json();
-
-    return weatherData;
-
 }
 
 const readLocationSearch = function(){
@@ -66,9 +66,16 @@ const onFailure = function(err){
     console.error(err)
 }
 
-const fetchRequestDataLocation = function(){
-    const geoData = shareLocation
-                        .then(getWeatherDataGeoLocation);
+const buildDataTableDOM = function(weatherData) {
 
+}
+
+const buildBasicDataInfo = function(weatherData) {
+    const dateTime = weatherData.days.datetime;
+    const location = `${weatherData.latitude}, ${weatherData.longitude}`;
+    const temp = weatherData.days.temp;
+    const dateTime = weatherData.;
+    const dateTime = weatherData.;
+    const dateTime = weatherData.;
 }
 
