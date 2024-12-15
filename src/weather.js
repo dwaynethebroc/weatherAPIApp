@@ -13,43 +13,39 @@ const getWeatherDataCityCountry = async function(){
     console.log(`${APIrequestURL + city},${country}?key=${key}`)
 
     const response = await fetch(`${APIrequestURL + city},${country}?key=${key}`, {mode: "cors"})
-        .catch(onFailure(err));
+        .catch(onFailure);
     const geoData = await response.json();
     
     return geoData;
 }
 
-const shareLocation = function(){
+const shareLocation = async function(){
     const latLongData = {};
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
+    
+    navigator.geolocation.getCurrentPosition((position) => {
             latLongData.latitude = position.coords.latitude;
             latLongData.longitude = position.coords.longitude;
 
             console.log(latLongData);
-
-            return latLongData;
         });
-    } else {
-        console.error("Location sharing is off");
-    }
 
-    
+    return latLongData;
 }
 
-const getWeatherDataGeoLocation = function(){
+const getWeatherDataGeoLocation = async function(){
+    const locationData = await shareLocation(); 
 
-    console.log(locationData);
+    console.log(locationData.latitude);
+    console.log(locationData.longitude);
 
     const key = "P7RMSP9B8LK52KS5VP79GS5TB";
     const APIrequestURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
-    console.log(`${APIrequestURL + locationData.latitude},${locationData.longitude}?key=${key}`)
+    console.log(`${APIrequestURL + locationData.latitude},${locationData.longitude}?unitGroup=metric&key=${key}`);
 
-    const response = await fetch(`${APIrequestURL + locationData.latitude},${locationData.longitude}?key=${key}`, {mode: "cors"})
-        .catch(onFailure(err));
+    const response = await fetch(`${APIrequestURL + locationData.latitude},${locationData.longitude}?key=${key}`, {mode: "cors"});
     const weatherData = await response.json();
 
+    console.log(weatherData);
 }
 
 const readLocationSearch = function(){
@@ -61,11 +57,17 @@ const readLocationSearch = function(){
 
     searchInput.value = '';
 
-    const location = {city, country}
-    return location
+    const location = {city, country};
+    return location;
 }
 
 const onFailure = function(err){
     console.error(err)
+}
+
+const fetchRequestDataLocation = function(){
+    const geoData = shareLocation
+                        .then(getWeatherDataGeoLocation);
+
 }
 
