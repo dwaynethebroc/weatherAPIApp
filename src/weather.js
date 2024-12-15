@@ -18,20 +18,23 @@ const getWeatherDataCityCountry = async function(){
 }
 
 const shareLocation = function(){
-    const latLongData = {};
+    const latLongData = {}
+    return new Promise((resolve, reject) => {
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition((position) => {
+                latLongData.latitude = position.coords.latitude;
+                latLongData.longitude = position.coords.longitude;
     
-    navigator.geolocation.getCurrentPosition((position) => {
-            latLongData.latitude = position.coords.latitude;
-            latLongData.longitude = position.coords.longitude;
-
-            console.log(latLongData);
-        });
-
-    return latLongData;
+                resolve(latLongData);
+            });
+        } else {
+            reject(onFailure("No Geo Data"));
+        }
+    })
 }
 
 const getWeatherDataGeoLocation = async function(){
-    const locationData = await shareLocation(); 
+    const locationData = await shareLocation();
     console.log(locationData);
 
     const key = "P7RMSP9B8LK52KS5VP79GS5TB";
@@ -41,6 +44,8 @@ const getWeatherDataGeoLocation = async function(){
 
     const response = await fetch(`${APIrequestURL + locationData.latitude},${locationData.longitude}?key=${key}`, {mode: "cors"});
     const weatherData = await response.json();
+
+    return weatherData;
 
 }
 
