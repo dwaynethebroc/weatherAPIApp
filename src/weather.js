@@ -70,6 +70,7 @@ const onFailure = function(err){
 
 const masterDOM = function(weatherData){
     buildBasicDataDOM(weatherData);
+    buildHourlyDOM(weatherData);
 }
 
 const buildDataTableDOM = function(weatherData) {
@@ -77,7 +78,7 @@ const buildDataTableDOM = function(weatherData) {
 }
 
 const buildBasicDataDOM = function(weatherData) {
-    const rows = ["datetime", "address", "location", "temp", "description", "conditions", "uvindex", "sunrise", "sunset"]
+    const rows = ["datetime", "address", "location", "temp", "description", "conditions", "uvindex", "sunrise", "sunset"];
     
     const datetime = weatherData.currentConditions.datetime;
     const address = weatherData.resolvedAddress; 
@@ -106,11 +107,57 @@ const buildBasicDataDOM = function(weatherData) {
 }
 
 const buildSevenDayDOM = function(weatherData) {
+    
 
 }
 
 const buildHourlyDOM = function(weatherData) {
+    console.log(weatherData);
+    const rows = ["datetime", "temp", "conditions", "icon"];
+    const hours = weatherData.days[0].hours;
 
+    console.log(hours);
+
+    const container = document.createElement('div');
+    container.classList.add('hourlyDiv');
+    document.body.appendChild(container);
+
+    const title = document.createElement('h1');
+    title.textContent = 'Hourly Info';
+    container.appendChild(title);
+
+    const newRow = document.createElement('div');
+    newRow.classList.add('hourlyRowTitle');
+    container.appendChild(newRow);
+
+    rows.forEach((row) => {
+        const newDiv = document.createElement('div');
+        newDiv.classList.add('hourlyRowCellTitle');
+        newDiv.textContent = `${row}`;
+
+        newRow.appendChild(newDiv);
+    })
+
+    hours.forEach((hour) => {
+        const data = {};
+        data.datetime = hour.datetime;
+        data.temp = hour.temp;
+        data.conditions = hour.conditions;
+        data.icon = hour.icon;
+
+        const row = document.createElement('div');
+        row.classList.add('weatherHourRow');
+
+        Object.keys(data).forEach(function(key) {
+            const cellData = document.createElement('div');
+            cellData.classList.add('hourlyWeatherCellData');
+            cellData.textContent = `${data[key]}`;
+
+            row.appendChild(cellData);
+        });
+
+        container.appendChild(row);
+    });
 }
 
 function createWeatherTable(rowNames, apiData) {
@@ -118,6 +165,10 @@ function createWeatherTable(rowNames, apiData) {
     const container = document.createElement('div');
     container.classList.add('weather-table'); // Optional: Add a class for styling
   
+    const title = document.createElement('h1');
+    title.textContent = 'Basic Info';
+    container.appendChild(title);
+
     // Loop through the rowNames array and create rows for each item
     rowNames.forEach(rowName => {
       const row = document.createElement('div');
