@@ -8,7 +8,7 @@ const getWeatherDataCityCountry = function(){
     const key = "P7RMSP9B8LK52KS5VP79GS5TB";
     const APIrequestURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 
-    const finalURL = (`${APIrequestURL + location.city},${location.country}?key=${key}`);
+    const finalURL = (`${APIrequestURL + location.city},${location.country}?unitGroup=metric&key=${key}`);
     console.log(finalURL);
 
     fetchDataFromServer(finalURL);
