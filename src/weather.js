@@ -71,6 +71,7 @@ const onFailure = function(err){
 const masterDOM = function(weatherData){
     buildBasicDataDOM(weatherData);
     buildHourlyDOM(weatherData);
+    buildSevenDayDOM(weatherData);
 }
 
 const buildDataTableDOM = function(weatherData) {
@@ -107,7 +108,57 @@ const buildBasicDataDOM = function(weatherData) {
 }
 
 const buildSevenDayDOM = function(weatherData) {
+    console.log(weatherData);
+    const weekArray = [];
+    const rows = ["datetime", "temp", "conditions", "icon"];
+    const days = weatherData.days;
+
+    console.log(days);
+
+    const container = document.createElement('div');
+    container.classList.add('weekForecastDiv');
+    document.body.appendChild(container);
+
+    const title = document.createElement('h1');
+    title.textContent = 'Week Forecast';
+    container.appendChild(title);
+
+    const newRow = document.createElement('div');
+    newRow.classList.add('WeeklyRow');
+    container.appendChild(newRow);
+
+    rows.forEach((row) => {
+        const newDiv = document.createElement('div');
+        newDiv.classList.add('weeklyRowCellTitle');
+        newDiv.textContent = `${row}`;
+
+        newRow.appendChild(newDiv);
+    })
+
+    for(let i = 0; i < 7; i++) {
+        weekArray.push(days[i]);
+    }
     
+    weekArray.forEach((weekday) => {
+        const data = {};
+        data.datetime = weekday.datetime;
+        data.temp = weekday.temp;
+        data.conditions = weekday.conditions;
+        data.icon = weekday.icon;
+
+        const row = document.createElement('div');
+        row.classList.add('weatherHourRow');
+
+        Object.keys(data).forEach(function(key) {
+            const cellData = document.createElement('div');
+            cellData.classList.add('weeklyWeatherCellData');
+            cellData.textContent = `${data[key]}`;
+
+            row.appendChild(cellData);
+        });
+
+        container.appendChild(row);
+    });
 
 }
 
