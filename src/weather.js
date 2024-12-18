@@ -74,10 +74,6 @@ const masterDOM = function(weatherData){
     buildSevenDayDOM(weatherData);
 }
 
-const buildDataTableDOM = function(weatherData) {
-
-}
-
 const buildBasicDataDOM = function(weatherData) {
     const rows = ["datetime", "address", "location", "temp", "description", "conditions", "uvindex", "sunrise", "sunset"];
     
@@ -152,7 +148,11 @@ const buildSevenDayDOM = function(weatherData) {
         Object.keys(data).forEach(function(key) {
             const cellData = document.createElement('div');
             cellData.classList.add('weeklyWeatherCellData');
-            cellData.textContent = `${data[key]}`;
+            if(data[key] === data.temp){
+                cellData.textContent = `${data[key] + " °C"}`;
+            } else {
+                cellData.textContent = `${data[key]}`;
+            }
 
             row.appendChild(cellData);
         });
@@ -202,7 +202,15 @@ const buildHourlyDOM = function(weatherData) {
         Object.keys(data).forEach(function(key) {
             const cellData = document.createElement('div');
             cellData.classList.add('hourlyWeatherCellData');
-            cellData.textContent = `${data[key]}`;
+            if(data[key] === data.temp){
+                cellData.textContent = `${data[key] + " °C"}`;
+            } else if(data[key] === data.icon){
+                const image = iconSwap(data[key]);
+                cellData.append(image);
+            } else {
+                cellData.textContent = `${data[key]}`;
+            }
+            
 
             row.appendChild(cellData);
         });
@@ -247,3 +255,82 @@ function createWeatherTable(rowNames, apiData) {
     document.body.appendChild(container);
   }
 
+  const iconSwap = function(weather){
+        const image = document.createElement('img');
+        let url = ''; 
+        switch (weather) {
+            case 'clear-day':
+                url = 'src/imgs/clear-day.svg';
+                break;
+            case 'clear-night':
+                url = 'src/imgs/clear-night.svg';
+                break;
+            case 'cloudy':
+                url = 'src/imgs/cloudy.svg';
+                break;
+            case 'fog':
+                url = 'src/imgs/fog.svg';
+                break;
+            case 'hail':
+                url = 'src/imgs/hail.svg';
+                break;
+            case 'partly-cloudy-day':
+                url = 'src/imgs/partly-cloudy-day.svg';
+                break;
+            case 'partly-cloudy-night':
+                url = 'src/imgs/partly-cloudy-night.svg';
+                break;
+            case 'rain-snow-showers-day':
+                url = 'src/imgs/rain-snow-showers-day.svg';
+                break;
+            case 'rain-snow-showers-night':
+                url = 'src/imgs/rain-snow-showers-night.svg';
+                break;
+            case 'rain-snow':
+                url = 'src/imgs/rain-snow.svg';
+                break;
+            case 'rain':
+                url = 'src/imgs/rain.svg';
+                break;
+            case 'showers-day':
+                url = 'src/imgs/showers-day.svg';
+                break;
+            case 'showers-night':
+                url = 'src/imgs/showers-night.svg';
+                break;
+            case 'sleet':
+                url = 'src/imgs/sleet.svg';
+                break;
+            case 'snow-showers-day':
+                url = 'src/imgs/snow-showers-day.svg';
+                break;
+            case 'snow-showers-night':
+                url = 'src/imgs/snow-showers-night.svg';
+                break;
+            case 'snow':
+                url = 'src/imgs/snow.svg';
+                break;
+            case 'thunder-rain':
+                url = 'src/imgs/thunder-rain.svg';
+                break;
+            case 'thunder-showers-day':
+                url = 'src/imgs/thunder-showers-day.svg';
+                break;
+            case 'thunder-showers-night':
+                url = 'src/imgs/thunder-showers-night.svg';
+                break;
+            case 'thunder':
+                url = 'src/imgs/thunder.svg';
+                break;
+            case 'wind':
+                url = 'src/imgs/wind.svg';
+                break;
+            default:
+                url = 'src/imgs/default.svg'; // Fallback for unmatched weather types
+                break;
+        }
+
+        image.src = url;
+        console.log(image.src);
+        return image;
+  }

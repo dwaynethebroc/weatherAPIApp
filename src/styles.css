@@ -68,6 +68,7 @@
     justify-content: space-between;
     padding: 5px;
     width: 75%;
+    height: 75px;
 }
 
 .weekForecastDiv {
@@ -86,6 +87,9 @@
     justify-content: space-between;
     padding: 5px;
     width: 75%;
+    height: 75px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .WeeklyRow {
@@ -97,4 +101,26 @@
     justify-content: space-between;
     padding: 5px;
     width: 75%;
+}
+
+.weeklyRowCellTitle {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.weather-label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.weeklyWeatherCellData {
+    width: 200px;
+}
+
+.hourlyWeatherCellData {
+    width: 200px;
+}
+
+.hourlyRowCellTitle {
+    width: 200px;
 }
