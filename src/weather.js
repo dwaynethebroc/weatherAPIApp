@@ -159,7 +159,7 @@ const buildSevenDayDOM = function(weatherData) {
     
     weekArray.forEach((weekday) => {
         const data = {};
-        data.datetime = weekday.datetime;
+        data.datetimeEpoch = weekday.datetimeEpoch;
         data.temp = weekday.temp;
         data.conditions = weekday.conditions;
         data.icon = weekday.icon;
@@ -170,7 +170,10 @@ const buildSevenDayDOM = function(weatherData) {
         Object.keys(data).forEach(function(key) {
             const cellData = document.createElement('div');
             cellData.classList.add('weeklyWeatherCellData');
-            if(data[key] === data.temp){
+            if(data[key] === data.datetimeEpoch) {
+                const d = new Date(data[key]*1000);
+                cellData.textContent = `${d.toString().slice(0, -53)}`;
+            } else if(data[key] === data.temp){
                 cellData.textContent = `${data[key] + " °C"}`;
             } else if(data[key] === data.icon){
                 const image = iconSwap(data[key]);
@@ -230,8 +233,10 @@ const buildHourlyDOM = function(weatherData) {
             } else if(data[key] === data.icon){
                 const image = iconSwap(data[key]);
                 cellData.append(image);
+            } else if(data[key] === data.datetime) {
+                cellData.textContent = `${data[key].slice(0, -3)}`;
             } else {
-                cellData.textContent = `${data[key]}`;
+                cellData.textContent = `${data[key]}`
             }
             
 

@@ -1,3 +1,8 @@
+html {
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+}
+
 .container {
     text-align: center;
     display: flex;
@@ -39,11 +44,12 @@
     display: flex;
     gap: 20px;
     border: 1px solid black;
-    height: 50px;
+    height: 100px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 5px;
     width: 75%;
+    
     
 }
 .weather-value {
@@ -68,7 +74,12 @@
     justify-content: space-between;
     padding: 5px;
     width: 75%;
+    height: 100px;
+}
+
+.weatherHourRow img {
     height: 75px;
+    width: 75px;
 }
 
 .weekForecastDiv {
@@ -78,13 +89,14 @@
     margin-top: 20px;
 }
 
+
 .hourlyRowTitle {
     display: flex;
     gap: 20px;
     border: 1px solid black;
     height: 50px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 5px;
     width: 75%;
     height: 75px;
@@ -96,16 +108,21 @@
     display: flex;
     gap: 20px;
     border: 1px solid black;
-    height: 50px;
+    height: 100px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 5px;
     width: 75%;
+    text-wrap: wrap;
 }
 
 .weeklyRowCellTitle {
     font-size: 20px;
     font-weight: bold;
+    min-width: none;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .weather-label {
@@ -115,12 +132,22 @@
 
 .weeklyWeatherCellData {
     width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hourlyWeatherCellData {
     width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hourlyRowCellTitle {
     width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
