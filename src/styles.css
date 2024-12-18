@@ -119,7 +119,7 @@ html {
 .weeklyRowCellTitle {
     font-size: 20px;
     font-weight: bold;
-    min-width: none;
+    min-width: 0;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -131,23 +131,25 @@ html {
 }
 
 .weeklyWeatherCellData {
-    width: 200px;
+    width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .hourlyWeatherCellData {
-    width: 200px;
+    width: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .hourlyRowCellTitle {
-    width: 200px;
+    width: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: none;
+    text-wrap: wrap;
 }
 

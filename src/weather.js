@@ -101,7 +101,7 @@ const masterDOM = function(weatherData){
 const buildBasicDataDOM = function(weatherData) {
     const rows = ["datetime", "address", "location", "temp", "description", "conditions", "uvindex", "sunrise", "sunset"];
     
-    const datetime = weatherData.currentConditions.datetime;
+    const datetime = weatherData.currentConditions.datetimeEpoch;
     const address = weatherData.resolvedAddress; 
     const location = `${weatherData.latitude}, ${weatherData.longitude}`;
     const temp = `${weatherData.currentConditions.temp} °C`;
@@ -269,7 +269,23 @@ function createWeatherTable(rowNames, apiData) {
       // Create a value div for the value from the API data
       const value = document.createElement('div');
       value.classList.add('weather-value'); // Class for values
-      value.textContent = apiData[rowName]
+
+      if(rowName === "datetime"){
+        const d = new Date(apiData[rowName]*1000);
+        console.log(d);
+
+        value.textContent = `${d.toString().slice(0, -47)}`;
+      } else if (rowName === "sunrise"){
+        value.textContent = apiData[rowName].slice(0,-3) + " AM";
+      } else if (rowName === "sunset"){
+        value.textContent = apiData[rowName].slice(0,-3) + " PM";
+      }
+      
+      else{
+        value.textContent = apiData[rowName]
+      }
+
+      
   
       // Append the label and value to the row
       row.appendChild(label);
