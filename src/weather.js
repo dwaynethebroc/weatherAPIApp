@@ -172,6 +172,9 @@ const buildSevenDayDOM = function(weatherData) {
             cellData.classList.add('weeklyWeatherCellData');
             if(data[key] === data.temp){
                 cellData.textContent = `${data[key] + " °C"}`;
+            } else if(data[key] === data.icon){
+                const image = iconSwap(data[key]);
+                cellData.append(image);
             } else {
                 cellData.textContent = `${data[key]}`;
             }
