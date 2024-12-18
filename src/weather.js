@@ -2,6 +2,30 @@
 
 export { getWeatherDataCityCountry, getWeatherDataGeoLocation}
 
+import clearDay from "./imgs/clear-day.svg";
+import clearNight from "./imgs/clear-night.svg";
+import cloudy from "./imgs/cloudy.svg";
+import fog from "./imgs/fog.svg";
+import hail from "./imgs/hail.svg";
+import partlyCloudyDay from "./imgs/partly-cloudy-day.svg";
+import partlyCloudyNight from "./imgs/partly-cloudy-night.svg";
+import rainSnowShowersDay from "./imgs/rain-snow-showers-day.svg";
+import rainSnowShowersNight from "./imgs/rain-snow-showers-night.svg";
+import rainSnow from "./imgs/rain-snow.svg";
+import rain from "./imgs/rain.svg";
+import showersDay from "./imgs/showers-day.svg";
+import showersNight from "./imgs/showers-night.svg";
+import sleet from "./imgs/sleet.svg";
+import snowShowersDay from "./imgs/snow-showers-day.svg";
+import snowShowersNight from "./imgs/snow-showers-night.svg";
+import snow from "./imgs/snow.svg";
+import thunderRain from "./imgs/thunder-rain.svg";
+import thunderShowersDay from "./imgs/thunder-showers-day.svg";
+import thunderShowersNight from "./imgs/thunder-showers-night.svg";
+import thunder from "./imgs/thunder.svg";
+import wind from "./imgs/wind.svg";
+
+
 const getWeatherDataCityCountry = function(){
     const location = readLocationSearch();
 
@@ -109,8 +133,6 @@ const buildSevenDayDOM = function(weatherData) {
     const rows = ["datetime", "temp", "conditions", "icon"];
     const days = weatherData.days;
 
-    console.log(days);
-
     const container = document.createElement('div');
     container.classList.add('weekForecastDiv');
     document.body.appendChild(container);
@@ -166,8 +188,6 @@ const buildHourlyDOM = function(weatherData) {
     console.log(weatherData);
     const rows = ["datetime", "temp", "conditions", "icon"];
     const hours = weatherData.days[0].hours;
-
-    console.log(hours);
 
     const container = document.createElement('div');
     container.classList.add('hourlyDiv');
@@ -255,82 +275,36 @@ function createWeatherTable(rowNames, apiData) {
     document.body.appendChild(container);
   }
 
-  const iconSwap = function(weather){
-        const image = document.createElement('img');
-        let url = ''; 
-        switch (weather) {
-            case 'clear-day':
-                url = 'src/imgs/clear-day.svg';
-                break;
-            case 'clear-night':
-                url = 'src/imgs/clear-night.svg';
-                break;
-            case 'cloudy':
-                url = 'src/imgs/cloudy.svg';
-                break;
-            case 'fog':
-                url = 'src/imgs/fog.svg';
-                break;
-            case 'hail':
-                url = 'src/imgs/hail.svg';
-                break;
-            case 'partly-cloudy-day':
-                url = 'src/imgs/partly-cloudy-day.svg';
-                break;
-            case 'partly-cloudy-night':
-                url = 'src/imgs/partly-cloudy-night.svg';
-                break;
-            case 'rain-snow-showers-day':
-                url = 'src/imgs/rain-snow-showers-day.svg';
-                break;
-            case 'rain-snow-showers-night':
-                url = 'src/imgs/rain-snow-showers-night.svg';
-                break;
-            case 'rain-snow':
-                url = 'src/imgs/rain-snow.svg';
-                break;
-            case 'rain':
-                url = 'src/imgs/rain.svg';
-                break;
-            case 'showers-day':
-                url = 'src/imgs/showers-day.svg';
-                break;
-            case 'showers-night':
-                url = 'src/imgs/showers-night.svg';
-                break;
-            case 'sleet':
-                url = 'src/imgs/sleet.svg';
-                break;
-            case 'snow-showers-day':
-                url = 'src/imgs/snow-showers-day.svg';
-                break;
-            case 'snow-showers-night':
-                url = 'src/imgs/snow-showers-night.svg';
-                break;
-            case 'snow':
-                url = 'src/imgs/snow.svg';
-                break;
-            case 'thunder-rain':
-                url = 'src/imgs/thunder-rain.svg';
-                break;
-            case 'thunder-showers-day':
-                url = 'src/imgs/thunder-showers-day.svg';
-                break;
-            case 'thunder-showers-night':
-                url = 'src/imgs/thunder-showers-night.svg';
-                break;
-            case 'thunder':
-                url = 'src/imgs/thunder.svg';
-                break;
-            case 'wind':
-                url = 'src/imgs/wind.svg';
-                break;
-            default:
-                url = 'src/imgs/default.svg'; // Fallback for unmatched weather types
-                break;
-        }
+const iconSwap = function (weather) {
 
-        image.src = url;
-        console.log(image.src);
-        return image;
-  }
+    const weatherIcons = {
+        'clear-day': clearDay,
+        'clear-night': clearNight,
+        'cloudy': cloudy,
+        'fog': fog,
+        'hail': hail,
+        'partly-cloudy-day': partlyCloudyDay,
+        'partly-cloudy-night': partlyCloudyNight,
+        'rain-snow-showers-day': rainSnowShowersDay,
+        'rain-snow-showers-night': rainSnowShowersNight,
+        'rain-snow': rainSnow,
+        'rain': rain,
+        'showers-day': showersDay,
+        'showers-night': showersNight,
+        'sleet': sleet,
+        'snow-showers-day': snowShowersDay,
+        'snow-showers-night': snowShowersNight,
+        'snow': snow,
+        'thunder-rain': thunderRain,
+        'thunder-showers-day': thunderShowersDay,
+        'thunder-showers-night': thunderShowersNight,
+        'thunder': thunder,
+        'wind': wind,
+    };
+
+    const image = document.createElement('img');
+    const url = weatherIcons[weather]; // Use the weatherIcons map, fallback to default
+    image.src = url;
+    console.log(image.src);
+    return image;
+};
