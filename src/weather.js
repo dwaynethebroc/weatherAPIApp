@@ -142,12 +142,12 @@ const buildSevenDayDOM = function(weatherData) {
     container.appendChild(title);
 
     const newRow = document.createElement('div');
-    newRow.classList.add('WeeklyRow');
+    newRow.classList.add('weatherRowTitle');
     container.appendChild(newRow);
 
     rows.forEach((row) => {
         const newDiv = document.createElement('div');
-        newDiv.classList.add('weeklyRowCellTitle');
+        newDiv.classList.add('weatherRowCellTitle');
         newDiv.textContent = `${row}`;
 
         newRow.appendChild(newDiv);
@@ -169,7 +169,7 @@ const buildSevenDayDOM = function(weatherData) {
 
         Object.keys(data).forEach(function(key) {
             const cellData = document.createElement('div');
-            cellData.classList.add('weeklyWeatherCellData');
+            cellData.classList.add('weatherCellData');
             if(data[key] === data.datetimeEpoch) {
                 const d = new Date(data[key]*1000);
                 cellData.textContent = `${d.toString().slice(0, -53)}`;
@@ -204,12 +204,12 @@ const buildHourlyDOM = function(weatherData) {
     container.appendChild(title);
 
     const newRow = document.createElement('div');
-    newRow.classList.add('hourlyRowTitle');
+    newRow.classList.add('weatherRowTitle');
     container.appendChild(newRow);
 
     rows.forEach((row) => {
         const newDiv = document.createElement('div');
-        newDiv.classList.add('hourlyRowCellTitle');
+        newDiv.classList.add('weatherRowTitleCell');
         newDiv.textContent = `${row}`;
 
         newRow.appendChild(newDiv);
@@ -227,7 +227,7 @@ const buildHourlyDOM = function(weatherData) {
 
         Object.keys(data).forEach(function(key) {
             const cellData = document.createElement('div');
-            cellData.classList.add('hourlyWeatherCellData');
+            cellData.classList.add('weatherCellData');
             if(data[key] === data.temp){
                 cellData.textContent = `${data[key] + " °C"}`;
             } else if(data[key] === data.icon){

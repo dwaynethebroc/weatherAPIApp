@@ -1,6 +1,17 @@
+@font-face {
+    font-family: "Absans-Regular";
+    src: url("./fonts/Absans-Regular.woff") format("woff2");
+  }
+
 html {
     background: rgb(131,58,180);
     background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+}
+
+p, h1, div {
+    font-family: "Absans-Regular";
+    font-weight: 600;
+    font-size: 17px;
 }
 
 .container {
@@ -24,7 +35,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
+    font-size: 17px;
     gap: 5px;
 
 }
@@ -55,6 +66,10 @@ html {
 .weather-value {
     margin-left: auto;
     margin-right: 0;
+
+    font-family: "Absans-Regular";
+    font-weight: 600;
+    font-size: 17px;
 }
 
 .hourlyDiv {
@@ -75,6 +90,26 @@ html {
     padding: 5px;
     width: 75%;
     height: 100px;
+
+    font-family: "Absans-Regular";
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.weatherRowTitle {
+    display: flex;
+    gap: 20px;
+    border: 1px solid black;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    width: 75%;
+    height: 100px;
+
+    font-family: "Absans-Regular";
+    font-weight: 600;
+    font-size: 17px;
 }
 
 .weatherHourRow img {
@@ -94,40 +129,47 @@ html {
     display: flex;
     gap: 20px;
     border: 1px solid black;
-    height: 50px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 5px;
     width: 75%;
     height: 75px;
-    font-size: 20px;
-    font-weight: bold;
+
+    font-family: "Absans-Regular";
+    font-weight: 600;
+    font-size: 17px;
 }
 
 .WeeklyRow {
     display: flex;
     gap: 20px;
     border: 1px solid black;
-    height: 100px;
+    height: 75px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 5px;
     width: 75%;
     text-wrap: wrap;
+
+    font-family: "Absans-Regular";
+    font-weight: 600;
+    font-size: 17px;
 }
 
 .weeklyRowCellTitle {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: bold;
     min-width: 0;
+    width: 150px;
     display: flex;
     justify-content: center;
     align-content: center;
 }
 
 .weather-label {
-    font-size: 20px;
-    font-weight: bold;
+    font-family: "Absans-Regular";
+    font-weight: 600;
+    font-size: 17px;
 }
 
 .weeklyWeatherCellData {
@@ -142,6 +184,10 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    font-family: "Absans-Regular";
+    font-weight: 600;
+    font-size: 17px;
 }
 
 .hourlyRowCellTitle {
@@ -151,5 +197,9 @@ html {
     justify-content: center;
     min-width: none;
     text-wrap: wrap;
+
+    font-family: "Absans-Regular";
+    font-weight: 600;
+    font-size: 17px;
 }
 
