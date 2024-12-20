@@ -25,6 +25,8 @@ import thunderShowersNight from "./imgs/thunder-showers-night.svg";
 import thunder from "./imgs/thunder.svg";
 import wind from "./imgs/wind.svg";
 
+const basicInfoDiv = document.getElementById('basicInfo');
+
 
 const getWeatherDataCityCountry = function(){
     const location = readLocationSearch();
@@ -34,6 +36,9 @@ const getWeatherDataCityCountry = function(){
 
     const finalURL = (`${APIrequestURL + location.city},${location.country}?unitGroup=metric&key=${key}`);
     console.log(finalURL);
+
+    const loadingImg = document.getElementById('loading');
+    loadingImg.className = "loading hidden";
 
     fetchDataFromServer(finalURL);
 }
@@ -47,6 +52,9 @@ const getWeatherDataGeoLocation = async function(){
     
     const finalURL = (`${APIrequestURL + locationData.latitude},${locationData.longitude}?unitGroup=metric&key=${key}`);
     console.log(finalURL);
+
+    const loadingImg = document.getElementById('loading');
+    loadingImg.className = "loading hidden";
 
     fetchDataFromServer(finalURL);
 }
@@ -93,20 +101,64 @@ const onFailure = function(err){
 }
 
 const masterDOM = function(weatherData){
+    buildMainWeatherInfo(weatherData);
     buildBasicDataDOM(weatherData);
     buildHourlyDOM(weatherData);
     buildSevenDayDOM(weatherData);
 }
 
+const buildMainWeatherInfo = function(weatherData){
+    console.log(weatherData);
+
+    const snapshotDiv = document.createElement('div');
+    snapshotDiv.className = "snapshot"
+
+    const rows = ["conditions", "temp", "description"];
+    const data = {};
+        data.temp = `${weatherData.currentConditions.temp} °C`;
+        data.description = weatherData.description;
+        data.conditions = weatherData.currentConditions.conditions;
+        data.icon = weatherData.currentConditions.icon;
+
+    const title = document.createElement('h1');
+    title.textContent = 'Snapshot';
+    snapshotDiv.appendChild(title);
+
+    const icon = iconSwap(data.icon);
+    icon.classList.add('mainIcon')
+    snapshotDiv.appendChild(icon);
+
+    basicInfoDiv.appendChild(snapshotDiv);
+
+    rows.forEach((row) => {
+
+        const rowDiv = document.createElement('div');
+        rowDiv.classList.add('snapshotRow');
+
+        const label = document.createElement('div');
+        label.classList.add('snapshotLabel');
+        label.textContent = `${row}: `;
+
+        const value = document.createElement('div');
+        value.classList.add('weatherValue');
+        value.innerText = `${data[row]}`;
+
+        rowDiv.appendChild(label);
+        rowDiv.appendChild(value);
+        snapshotDiv.appendChild(rowDiv);
+    })
+    
+    //createWeatherTable(rows, data);
+
+    
+}
+
 const buildBasicDataDOM = function(weatherData) {
-    const rows = ["datetime", "address", "location", "temp", "description", "conditions", "uvindex", "sunrise", "sunset"];
+    const rows = ["datetime", "address", "location", "uvindex", "sunrise", "sunset"];
     
     const datetime = weatherData.currentConditions.datetimeEpoch;
     const address = weatherData.resolvedAddress; 
     const location = `${weatherData.latitude}, ${weatherData.longitude}`;
-    const temp = `${weatherData.currentConditions.temp} °C`;
-    const description = weatherData.description;
-    const conditions = weatherData.currentConditions.conditions;
     const uvindex = weatherData.currentConditions.uvindex;
     const sunrise = weatherData.currentConditions.sunrise;
     const sunset = weatherData.currentConditions.sunset;
@@ -115,16 +167,74 @@ const buildBasicDataDOM = function(weatherData) {
         datetime: datetime,
         address: address,
         location: location,
-        temp: temp,
-        description: description,
-        conditions: conditions,
         uvindex: uvindex,
         sunrise: sunrise,
         sunset: sunset
     };
 
+    const title = document.createElement('h1');
+    title.textContent = 'Basic Info';
+    basicInfoDiv.appendChild(title);
+
     createWeatherTable(rows, data);
     
+}
+
+const buildHourlyDOM = function(weatherData) {
+    console.log(weatherData);
+    const rows = ["datetime", "temp", "conditions", "icon"];
+    const hours = weatherData.days[0].hours;
+
+    const container = document.createElement('div');
+    container.classList.add('hourlyDiv');
+    basicInfoDiv.appendChild(container);
+
+    const title = document.createElement('h1');
+    title.textContent = 'Hourly Info';
+    container.appendChild(title);
+
+    const newRow = document.createElement('div');
+    newRow.classList.add('weatherRowTitle');
+    container.appendChild(newRow);
+
+    rows.forEach((row) => {
+        const newDiv = document.createElement('div');
+        newDiv.classList.add('weatherRowTitleCell');
+        newDiv.textContent = `${row}`;
+
+        newRow.appendChild(newDiv);
+    })
+
+    hours.forEach((hour) => {
+        const data = {};
+        data.datetime = hour.datetime;
+        data.temp = hour.temp;
+        data.conditions = hour.conditions;
+        data.icon = hour.icon;
+
+        const row = document.createElement('div');
+        row.classList.add('weatherHourRow');
+
+        Object.keys(data).forEach(function(key) {
+            const cellData = document.createElement('div');
+            cellData.classList.add('weatherCellData');
+            if(data[key] === data.temp){
+                cellData.textContent = `${data[key] + " °C"}`;
+            } else if(data[key] === data.icon){
+                const image = iconSwap(data[key]);
+                cellData.append(image);
+            } else if(data[key] === data.datetime) {
+                cellData.textContent = `${data[key].slice(0, -3)}`;
+            } else {
+                cellData.textContent = `${data[key]}`
+            }
+            
+
+            row.appendChild(cellData);
+        });
+
+        container.appendChild(row);
+    });
 }
 
 const buildSevenDayDOM = function(weatherData) {
@@ -135,7 +245,7 @@ const buildSevenDayDOM = function(weatherData) {
 
     const container = document.createElement('div');
     container.classList.add('weekForecastDiv');
-    document.body.appendChild(container);
+    basicInfoDiv.appendChild(container);
 
     const title = document.createElement('h1');
     title.textContent = 'Week Forecast';
@@ -190,71 +300,10 @@ const buildSevenDayDOM = function(weatherData) {
 
 }
 
-const buildHourlyDOM = function(weatherData) {
-    console.log(weatherData);
-    const rows = ["datetime", "temp", "conditions", "icon"];
-    const hours = weatherData.days[0].hours;
-
-    const container = document.createElement('div');
-    container.classList.add('hourlyDiv');
-    document.body.appendChild(container);
-
-    const title = document.createElement('h1');
-    title.textContent = 'Hourly Info';
-    container.appendChild(title);
-
-    const newRow = document.createElement('div');
-    newRow.classList.add('weatherRowTitle');
-    container.appendChild(newRow);
-
-    rows.forEach((row) => {
-        const newDiv = document.createElement('div');
-        newDiv.classList.add('weatherRowTitleCell');
-        newDiv.textContent = `${row}`;
-
-        newRow.appendChild(newDiv);
-    })
-
-    hours.forEach((hour) => {
-        const data = {};
-        data.datetime = hour.datetime;
-        data.temp = hour.temp;
-        data.conditions = hour.conditions;
-        data.icon = hour.icon;
-
-        const row = document.createElement('div');
-        row.classList.add('weatherHourRow');
-
-        Object.keys(data).forEach(function(key) {
-            const cellData = document.createElement('div');
-            cellData.classList.add('weatherCellData');
-            if(data[key] === data.temp){
-                cellData.textContent = `${data[key] + " °C"}`;
-            } else if(data[key] === data.icon){
-                const image = iconSwap(data[key]);
-                cellData.append(image);
-            } else if(data[key] === data.datetime) {
-                cellData.textContent = `${data[key].slice(0, -3)}`;
-            } else {
-                cellData.textContent = `${data[key]}`
-            }
-            
-
-            row.appendChild(cellData);
-        });
-
-        container.appendChild(row);
-    });
-}
-
 function createWeatherTable(rowNames, apiData) {
     // Create a container div for the table
     const container = document.createElement('div');
     container.classList.add('weather-table'); // Optional: Add a class for styling
-  
-    const title = document.createElement('h1');
-    title.textContent = 'Basic Info';
-    container.appendChild(title);
 
     // Loop through the rowNames array and create rows for each item
     rowNames.forEach(rowName => {
@@ -296,7 +345,8 @@ function createWeatherTable(rowNames, apiData) {
     });
   
     // Append the container to the body or a specific element on the page
-    document.body.appendChild(container);
+    
+    basicInfoDiv.appendChild(container);
   }
 
 const iconSwap = function (weather) {

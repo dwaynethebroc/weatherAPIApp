@@ -8,10 +8,50 @@ html {
     background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
 }
 
-p, h1, div {
+h1 {
     font-family: "Absans-Regular";
-    font-weight: 600;
-    font-size: 17px;
+    font-weight: 800;
+    font-size: 25px;
+}
+
+img.mainIcon {
+    height: 150px;
+    width: 150px;
+}
+
+.snapshot {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    font-family: "Absans-Regular";
+    font-weight: 700;
+    border: 1px solid  black;
+
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+
+    padding: 5px;
+
+    width: 75%;
+}
+
+.snapshotRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    width: 100%;
+}
+
+.snapshotLabel {
+    font-size: 25px;
+}
+
+.weatherValue {
+    font-size: 25px;
 }
 
 .container {
