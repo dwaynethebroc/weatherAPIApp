@@ -154,11 +154,10 @@ const buildMainWeatherInfo = function(weatherData){
 }
 
 const buildBasicDataDOM = function(weatherData) {
-    const rows = ["datetime", "address", "location", "uvindex", "sunrise", "sunset"];
+    const rows = ["datetime", "address", "uvindex", "sunrise", "sunset"];
     
     const datetime = weatherData.currentConditions.datetimeEpoch;
     const address = weatherData.resolvedAddress; 
-    const location = `${weatherData.latitude}, ${weatherData.longitude}`;
     const uvindex = weatherData.currentConditions.uvindex;
     const sunrise = weatherData.currentConditions.sunrise;
     const sunset = weatherData.currentConditions.sunset;
@@ -166,7 +165,6 @@ const buildBasicDataDOM = function(weatherData) {
     const data = {
         datetime: datetime,
         address: address,
-        location: location,
         uvindex: uvindex,
         sunrise: sunrise,
         sunset: sunset
@@ -199,7 +197,7 @@ const buildHourlyDOM = function(weatherData) {
 
     rows.forEach((row) => {
         const newDiv = document.createElement('div');
-        newDiv.classList.add('weatherRowTitleCell');
+        newDiv.classList.add('weatherRowCellTitle');
         newDiv.textContent = `${row}`;
 
         newRow.appendChild(newDiv);
@@ -223,6 +221,7 @@ const buildHourlyDOM = function(weatherData) {
             } else if(data[key] === data.icon){
                 const image = iconSwap(data[key]);
                 cellData.append(image);
+                cellData.classList.add('icon');
             } else if(data[key] === data.datetime) {
                 cellData.textContent = `${data[key].slice(0, -3)}`;
             } else {
@@ -287,6 +286,7 @@ const buildSevenDayDOM = function(weatherData) {
                 cellData.textContent = `${data[key] + " °C"}`;
             } else if(data[key] === data.icon){
                 const image = iconSwap(data[key]);
+                cellData.classList.add('icon');
                 cellData.append(image);
             } else {
                 cellData.textContent = `${data[key]}`;

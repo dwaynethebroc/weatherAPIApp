@@ -11,12 +11,32 @@ html {
 h1 {
     font-family: "Absans-Regular";
     font-weight: 800;
-    font-size: 25px;
+    font-size: 30px;
+    margin-top: 20px;
 }
 
 img.mainIcon {
     height: 150px;
     width: 150px;
+}
+
+img#loading{
+    width: 100%;
+    height: auto;
+}
+
+img.weatherCellData {
+    width: 75px;
+    height: 75px;
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    gap: 5px;
 }
 
 .snapshot {
@@ -35,6 +55,8 @@ img.mainIcon {
     padding: 5px;
 
     width: 75%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .snapshotRow {
@@ -54,21 +76,10 @@ img.mainIcon {
     font-size: 25px;
 }
 
-.container {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-content: space-between;
-    gap: 5px;
-}
+
 
 .hidden {
     display: none;
-}
-
-#loading {
-
 }
 
 .footer {
@@ -95,11 +106,11 @@ img.mainIcon {
     display: flex;
     gap: 20px;
     border: 1px solid black;
-    height: 100px;
+    height: minmax(fit-content, 100px);
     align-items: center;
     justify-content: center;
     padding: 5px;
-    width: 75%;
+    width: 85%;
     
     
 }
@@ -113,6 +124,7 @@ img.mainIcon {
 }
 
 .hourlyDiv {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -124,28 +136,32 @@ img.mainIcon {
     display: flex;
     gap: 20px;
     border: 1px solid black;
-    height: 50px;
     align-items: center;
     justify-content: space-between;
     padding: 5px;
-    width: 75%;
+    width: 85%;
     height: 100px;
+    text-align: left;
 
     font-family: "Absans-Regular";
     font-weight: 600;
     font-size: 17px;
 }
 
+.weatherRowCellTitle{
+    width: 100px;
+    text-align: left;
+}
+
 .weatherRowTitle {
     display: flex;
     gap: 20px;
     border: 1px solid black;
-    height: 50px;
+    height: fit-content;
     align-items: center;
     justify-content: space-between;
     padding: 5px;
-    width: 75%;
-    height: 100px;
+    width: 85%;
 
     font-family: "Absans-Regular";
     font-weight: 600;
@@ -153,8 +169,12 @@ img.mainIcon {
 }
 
 .weatherHourRow img {
-    height: 75px;
-    width: 75px;
+    width: 75px
+}
+
+.icon {
+    width: 150px;
+    flex-shrink: 0;
 }
 
 .weekForecastDiv {
@@ -162,48 +182,7 @@ img.mainIcon {
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
-}
-
-
-.hourlyRowTitle {
-    display: flex;
-    gap: 20px;
-    border: 1px solid black;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px;
-    width: 75%;
-    height: 75px;
-
-    font-family: "Absans-Regular";
-    font-weight: 600;
-    font-size: 17px;
-}
-
-.WeeklyRow {
-    display: flex;
-    gap: 20px;
-    border: 1px solid black;
-    height: 75px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px;
-    width: 75%;
-    text-wrap: wrap;
-
-    font-family: "Absans-Regular";
-    font-weight: 600;
-    font-size: 17px;
-}
-
-.weeklyRowCellTitle {
-    font-size: 17px;
-    font-weight: bold;
-    min-width: 0;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
+    margin-bottom: 20px;
 }
 
 .weather-label {
@@ -212,34 +191,17 @@ img.mainIcon {
     font-size: 17px;
 }
 
-.weeklyWeatherCellData {
+.icon{
     width: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-grow: 0;
 }
 
-.hourlyWeatherCellData {
-    width: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-family: "Absans-Regular";
-    font-weight: 600;
-    font-size: 17px;
+.weatherCellData {
+    max-width: 100px;
+    flex-grow: 1;
+    text-align: left;
 }
 
-.hourlyRowCellTitle {
-    width: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: none;
-    text-wrap: wrap;
-
-    font-family: "Absans-Regular";
-    font-weight: 600;
-    font-size: 17px;
+.weatherCellData.icon {
+    flex-grow: 0;
 }
-
