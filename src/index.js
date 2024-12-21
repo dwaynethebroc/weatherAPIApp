@@ -1,8 +1,8 @@
 import "./styles.css";
-import { getWeatherDataCityCountry, getWeatherDataGeoLocation} from "./weather.js";
+import { verifyString, getWeatherDataGeoLocation} from "./weather.js";
 
 const searchButton = document.getElementById('searchButton');
-searchButton.addEventListener('click', getWeatherDataCityCountry);
+searchButton.addEventListener('click', verifyString);
 
 const shareLocationButton = document.getElementById('shareLocation');
 shareLocationButton.addEventListener('click', getWeatherDataGeoLocation);

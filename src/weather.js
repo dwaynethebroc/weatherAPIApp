@@ -1,6 +1,6 @@
 // weather.js
 
-export { getWeatherDataCityCountry, getWeatherDataGeoLocation}
+export { verifyString, getWeatherDataGeoLocation}
 
 import clearDay from "./imgs/clear-day.svg";
 import clearNight from "./imgs/clear-night.svg";
@@ -27,10 +27,34 @@ import wind from "./imgs/wind.svg";
 
 const basicInfoDiv = document.getElementById('basicInfo');
 
+const verifyString = function() {
+    const cityCountryRegex = /^[a-zA-Z\s\.'-]+,\s*[a-zA-Z\s\.'-]+$/;
+    const existingError = document.getElementById('errorMessage');
+    const string = document.getElementById('locationSearch');
+
+    if(existingError){
+        existingError.remove();
+    }
+
+    if (cityCountryRegex.test(string.value)){
+        getWeatherDataCityCountry()
+    } else {
+        const errorMessage = document.createElement('div');
+        errorMessage.id = 'errorMessage'; 
+        errorMessage.innerHTML = "Please enter a new request in the format:<br><strong>City, Country<strong><br>";
+
+        string.value = '';
+
+        const searchDiv = document.querySelector('.search');
+        
+        searchDiv.append(errorMessage);
+    }
+}
+
 
 const getWeatherDataCityCountry = function(){
-    loadingDOM();
     const location = readLocationSearch();
+    loadingDOM();
     
 
     const key = "P7RMSP9B8LK52KS5VP79GS5TB";
