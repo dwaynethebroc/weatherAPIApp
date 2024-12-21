@@ -3,6 +3,12 @@
     src: url("./fonts/Absans-Regular.woff") format("woff2");
   }
 
+@media screen and (max-width: 500px) {
+    .container{
+        padding: 0px 20px;
+    }
+}
+
 html {
     background: rgb(131,58,180);
     background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
@@ -20,9 +26,10 @@ img.mainIcon {
     width: 150px;
 }
 
-img#loading{
-    width: 100%;
+img#loadingIMG {
+    width: 50%;
     height: auto;
+    object-fit: contain;
 }
 
 img.weatherCellData {
@@ -33,10 +40,11 @@ img.weatherCellData {
 .container {
     text-align: center;
     display: flex;
+    justify-self: stretch;
     flex-direction: column;
-    justify-content: space-between;
-    align-content: space-between;
     gap: 5px;
+    height: 100vh;
+    margin: 0px;
 }
 
 .snapshot {
@@ -86,13 +94,14 @@ img.weatherCellData {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
+    font-size: 15px;
     gap: 5px;
 
 }
 
 #githubLogo {
-    height: 25px;
+    height: 20px;
+    border-radius: 10px;
 
 }
 
@@ -149,7 +158,7 @@ img.weatherCellData {
 }
 
 .weatherRowCellTitle{
-    width: 100px;
+    width: 75px;
     text-align: left;
 }
 
@@ -173,8 +182,9 @@ img.weatherCellData {
 }
 
 .icon {
-    width: 150px;
+    width: 100px;
     flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .weekForecastDiv {
@@ -191,13 +201,8 @@ img.weatherCellData {
     font-size: 17px;
 }
 
-.icon{
-    width: 150px;
-    flex-grow: 0;
-}
-
 .weatherCellData {
-    max-width: 100px;
+    width: 75px;
     flex-grow: 1;
     text-align: left;
 }

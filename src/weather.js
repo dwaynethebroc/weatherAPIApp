@@ -29,7 +29,9 @@ const basicInfoDiv = document.getElementById('basicInfo');
 
 
 const getWeatherDataCityCountry = function(){
+    loadingDOM();
     const location = readLocationSearch();
+    
 
     const key = "P7RMSP9B8LK52KS5VP79GS5TB";
     const APIrequestURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
@@ -44,6 +46,7 @@ const getWeatherDataCityCountry = function(){
 }
 
 const getWeatherDataGeoLocation = async function(){
+    loadingDOM();
     const locationData = await shareLocation();
     console.log(locationData);
 
@@ -52,9 +55,6 @@ const getWeatherDataGeoLocation = async function(){
     
     const finalURL = (`${APIrequestURL + locationData.latitude},${locationData.longitude}?unitGroup=metric&key=${key}`);
     console.log(finalURL);
-
-    const loadingImg = document.getElementById('loading');
-    loadingImg.className = "loading hidden";
 
     fetchDataFromServer(finalURL);
 }
@@ -78,10 +78,22 @@ const shareLocation = function(){
 const fetchDataFromServer = async function(URL) {
     const response = await fetch(URL, {mode: "cors"});
     const weatherData = await response.json()
-    console.log(weatherData);
 
     masterDOM(weatherData);
-  }
+}
+
+const loadingDOM = function(){
+    const locationDiv = document.getElementsByClassName('getLocation');
+    locationDiv.className = "getLocation hidden";
+
+    const div = document.getElementById("loading");
+    div.className = "loading";
+}
+
+const closeDOM = function(){
+    const div = document.getElementById("loading");
+    div.className = "loading hidden";
+}
 
 const readLocationSearch = function(){
     const searchInput = document.getElementById('locationSearch');
@@ -101,6 +113,7 @@ const onFailure = function(err){
 }
 
 const masterDOM = function(weatherData){
+    closeDOM();
     buildMainWeatherInfo(weatherData);
     buildBasicDataDOM(weatherData);
     buildHourlyDOM(weatherData);
@@ -179,7 +192,6 @@ const buildBasicDataDOM = function(weatherData) {
 }
 
 const buildHourlyDOM = function(weatherData) {
-    console.log(weatherData);
     const rows = ["datetime", "temp", "conditions", "icon"];
     const hours = weatherData.days[0].hours;
 
@@ -237,7 +249,6 @@ const buildHourlyDOM = function(weatherData) {
 }
 
 const buildSevenDayDOM = function(weatherData) {
-    console.log(weatherData);
     const weekArray = [];
     const rows = ["datetime", "temp", "conditions", "icon"];
     const days = weatherData.days;
@@ -379,6 +390,5 @@ const iconSwap = function (weather) {
     const image = document.createElement('img');
     const url = weatherIcons[weather]; // Use the weatherIcons map, fallback to default
     image.src = url;
-    console.log(image.src);
     return image;
 };
