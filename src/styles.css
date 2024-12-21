@@ -214,8 +214,10 @@ img.weatherCellData {
 .resetButton {
     border-radius: 10px;
     background-color: transparent;
-    
+    border-width: 3px;
+    border-color: rgb(115, 61, 61);
+
     font-family: "Absans-Regular";
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 800;
 }

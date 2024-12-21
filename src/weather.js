@@ -83,16 +83,19 @@ const fetchDataFromServer = async function(URL) {
 }
 
 const loadingDOM = function(){
-    const locationDiv = document.getElementsByClassName('getLocation');
+    const locationDiv = document.getElementById('search');
     locationDiv.className = "getLocation hidden";
 
-    const div = document.getElementById("loading");
-    div.className = "loading";
+    const loadingDiv = document.getElementById("loading");
+    loadingDiv.className = "loading";
 }
 
 const closeDOM = function(){
     const div = document.getElementById("loading");
     div.className = "loading hidden";
+
+    const search = document.getElementById('search');
+    search.className = "getLocation hidden";
 }
 
 const readLocationSearch = function(){
@@ -403,4 +406,12 @@ const resetLocation = function() {
     // locationForm.className = 'getLocation';
 
     console.log('reset function');
+
+    const searchDiv = document.getElementById('search');
+    const snapshotDiv = document.getElementById('snapshot');
+
+    snapshotDiv.innerText = '';
+    basicInfoDiv.innerText = '';
+
+    searchDiv.className = "getLocation";    
 }
