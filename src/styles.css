@@ -210,3 +210,12 @@ img.weatherCellData {
 .weatherCellData.icon {
     flex-grow: 0;
 }
+
+.resetButton {
+    border-radius: 10px;
+    background-color: transparent;
+    
+    font-family: "Absans-Regular";
+    font-size: 20px;
+    font-weight: 800;
+}

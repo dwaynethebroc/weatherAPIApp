@@ -124,7 +124,7 @@ const buildMainWeatherInfo = function(weatherData){
     console.log(weatherData);
 
     const snapshotDiv = document.createElement('div');
-    snapshotDiv.className = "snapshot"
+    snapshotDiv.className = "snapshot";
 
     const rows = ["conditions", "temp", "description"];
     const data = {};
@@ -141,7 +141,8 @@ const buildMainWeatherInfo = function(weatherData){
     icon.classList.add('mainIcon')
     snapshotDiv.appendChild(icon);
 
-    basicInfoDiv.appendChild(snapshotDiv);
+    const snapshotContainer = document.getElementById('snapshot');
+    snapshotContainer.appendChild(snapshotDiv);
 
     rows.forEach((row) => {
 
@@ -161,9 +162,12 @@ const buildMainWeatherInfo = function(weatherData){
         snapshotDiv.appendChild(rowDiv);
     })
     
-    //createWeatherTable(rows, data);
+    const resetButton = document.createElement('button');
+    resetButton.classList.add('resetButton');
+    resetButton.textContent = 'Change Location';
 
-    
+    resetButton.addEventListener('click', resetLocation);
+    snapshotDiv.appendChild(resetButton);
 }
 
 const buildBasicDataDOM = function(weatherData) {
@@ -392,3 +396,11 @@ const iconSwap = function (weather) {
     image.src = url;
     return image;
 };
+
+const resetLocation = function() {
+    // const snapshotDiv = document.getElementsByClassName('snapshot');
+    // const locationForm = document.getElementsByClassName('getLocation');
+    // locationForm.className = 'getLocation';
+
+    console.log('reset function');
+}
