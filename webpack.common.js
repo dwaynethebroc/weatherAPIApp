@@ -26,8 +26,8 @@ module.exports = {
         rules: [         
             { test: /\.(sass|less|css)$/, use: ["style-loader", "css-loader", 'sass-loader'],},
             { test: /\.html$/i, loader: "html-loader",},   
-            { test: /\.(png|jpg|jpeg|gif|svg)$/i, use: ["file-loader"],},
-            { test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/, use: ["file-loader"]},
+            { test: /\.(png|jpg|jpeg|gif)$/i, type: "asset/resource"},
+            { test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, use: ["file-loader"]},
         ],
     },
 }; 
