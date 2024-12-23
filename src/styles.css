@@ -216,7 +216,7 @@ img.weatherCellData {
     flex-grow: 0;
 }
 
-.resetButton {
+button.resetButton {
     border-radius: 10px;
     background-color: transparent;
     border-width: 3px;
@@ -227,7 +227,7 @@ img.weatherCellData {
     font-weight: 800;
 }
 
-.locationButton {
+button.locationButton {
     border-radius: 10px;
     background-color: transparent;
     border-width: 3px;
@@ -238,7 +238,7 @@ img.weatherCellData {
     font-weight: 800;
 }
 
-#locationSearch {
+button#locationSearch {
     border-radius: 10px;
     border-width: 3px;
 
