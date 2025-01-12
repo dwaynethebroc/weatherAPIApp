@@ -177,8 +177,9 @@ const buildMainWeatherInfo = function(weatherData){
         rowDiv.classList.add('snapshotRow');
 
         const label = document.createElement('div');
+        let labelCapitalized = row[0].toUpperCase() + row.slice(1);
         label.classList.add('snapshotLabel');
-        label.textContent = `${row}: `;
+        label.textContent = `${labelCapitalized}: `;
 
         const value = document.createElement('div');
         value.classList.add('weatherValue');
@@ -239,9 +240,13 @@ const buildHourlyDOM = function(weatherData) {
     container.appendChild(newRow);
 
     rows.forEach((row) => {
+        if (row === "datetime"){
+            row = "Hour";
+        }
         const newDiv = document.createElement('div');
         newDiv.classList.add('weatherRowCellTitle');
-        newDiv.textContent = `${row}`;
+        const labelCapitalized = row[0].toUpperCase() + row.slice(1);
+        newDiv.textContent = `${labelCapitalized}`;
 
         newRow.appendChild(newDiv);
     })
@@ -297,9 +302,13 @@ const buildSevenDayDOM = function(weatherData) {
     container.appendChild(newRow);
 
     rows.forEach((row) => {
+        if (row === "datetime"){
+            row = "Date";
+        }
         const newDiv = document.createElement('div');
         newDiv.classList.add('weatherRowCellTitle');
-        newDiv.textContent = `${row}`;
+        const labelUpper = row[0].toUpperCase() + row.slice(1);
+        newDiv.textContent = `${labelUpper}`;
 
         newRow.appendChild(newDiv);
     })
@@ -355,7 +364,15 @@ function createWeatherTable(rowNames, apiData) {
       // Create a label div for the row name
       const label = document.createElement('div');
       label.classList.add('weather-label'); // Class for labels
-      label.textContent = rowName;
+      let labelCapitalized = rowName[0].toUpperCase() + rowName.slice(1);
+      if(labelCapitalized === "Datetime") {
+        labelCapitalized = "Time & Date";
+      } else if (labelCapitalized === "Uvindex"){
+        labelCapitalized = "UV Index";
+      } else if (labelCapitalized === "Address"){
+        labelCapitalized = "Location";
+      }
+      label.textContent = labelCapitalized;
   
       // Create a value div for the value from the API data
       const value = document.createElement('div');

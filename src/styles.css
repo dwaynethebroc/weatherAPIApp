@@ -238,7 +238,7 @@ button.locationButton {
     font-weight: 800;
 }
 
-button#locationSearch {
+input#locationSearch {
     border-radius: 10px;
     border-width: 3px;
 
